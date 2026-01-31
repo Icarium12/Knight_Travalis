@@ -54,7 +54,29 @@ for (let i = 0; i < board.length; i++) {
 
 
 function knightMoves(start, end, queue = [], visited = []) {
+    const node = board[start[0]][start[1]];
+    
+    
+}
 
+function decison(node, end, queue, visited) {
+    queue.push(node);
+    let nextNode;
+    const row = node.value[0] - end[0];
+    const column = node.value[1] - end[1];
+
+    if (row === 1 && column <= -2) {
+        nextNode = sideLeftUp(queue, visited);
+    }
+    else if (row === 1 && column >= 2) {
+        nextNode = sideRightUp(queue, visited);
+    }
+    else if (row === -1 && column <= -2) {
+        nextNode = sideLeftDown(queue, visited);
+    } 
+    else if (row === -1 && column >= 2) {
+        nextNode = sideRightDown(queue, visited);
+    }
 }
 
 const queue = [];
@@ -67,7 +89,7 @@ console.log(downRight(queue, visited));
 function sideLeftUp(queue, visited, count = 0) {
     if (count === 2) {
         const node = queue.shift();
-        // visited.push(node);
+        visited.push(node);
         visited.push(node.up);
         console.log(visited.length);
         visited.forEach(node => {
@@ -76,17 +98,23 @@ function sideLeftUp(queue, visited, count = 0) {
         return visited;
     }
     const node = queue.shift();
-    visited.push(node.left);
-    queue.push(node.left);
-    count++;
-    return sideLeftUp(queue, visited, count);
+    if (node === null) {
+        return;
+    }
+    else {
+        visited.push(node);
+        // visited.push(node.left);
+        queue.push(node.left);
+        count++;
+        return sideLeftUp(queue, visited, count)        
+    }
 
 }
 
 function sideRightUp(queue, visited, count = 0) {
     if (count === 2) {
         const node = queue.shift();
-        // visited.push(node);
+        visited.push(node);
         visited.push(node.up);
         console.log(visited.length);
         visited.forEach(node => {
@@ -95,16 +123,22 @@ function sideRightUp(queue, visited, count = 0) {
         return visited;
     }
     const node = queue.shift();
-    visited.push(node.right);
-    queue.push(node.right);
-    count++;
-    return sideRightUp(queue, visited, count);
-
+    if (node === null) {
+        return;
+    }
+    else {
+        visited.push(node);
+        // visited.push(node.right);
+        queue.push(node.right);
+        count++;
+        return sideRightUp(queue, visited, count);        
+    }
 }
 
 function sideLeftDown(queue, visited, count = 0) {
     if (count === 2) {
         const node = queue.shift();
+        visited.push(node);
         visited.push(node.down);
         console.log(visited.length);
         visited.forEach(node => {
@@ -113,17 +147,23 @@ function sideLeftDown(queue, visited, count = 0) {
         return visited;
     }
     const node = queue.shift();
-    visited.push(node.left);
-    queue.push(node.left);
-    count++;
-    return sideLeftDown(queue, visited, count);
-
+    if (node === null) {
+        return;
+    }
+    else {
+        visited.push(node);
+        // visited.push(node.left);
+        queue.push(node.left);
+        count++;
+        return sideLeftDown(queue, visited, count);        
+    }
 }
 
 
 function sideRightDown(queue, visited, count = 0) {
     if (count === 2) {
         const node = queue.shift();
+        visited.push(node);
         visited.push(node.down);
         console.log(visited.length);
         visited.forEach(node => {
@@ -132,16 +172,23 @@ function sideRightDown(queue, visited, count = 0) {
         return visited;
     }
     const node = queue.shift();
-    visited.push(node.right);
-    queue.push(node.right);
-    count++;
-    return sideRightDown(queue, visited, count);
+    if (node === null) {
+        return;
+    }
+    else {
+        visited.push(node);
+        // visited.push(node.right);
+        queue.push(node.right);
+        count++;
+        return sideRightDown(queue, visited, count);        
+    }
 }
 
 
 function upLeft(queue, visited, count = 0) {
     if (count === 2) {
         const node = queue.shift();
+        visited.push(node);
         visited.push(node.left);
         console.log(visited.length);
         visited.forEach(node => {
@@ -150,16 +197,22 @@ function upLeft(queue, visited, count = 0) {
         return visited;
     }
     const node = queue.shift();
-    visited.push(node.up);
-    queue.push(node.up);
-    count++;
-    return upLeft(queue, visited, count);
-
+    if (node === null) {
+        return;
+    }
+    else {
+        visited.push(node);
+        // visited.push(node.up);
+        queue.push(node.up);
+        count++;
+        return upLeft(queue, visited, count);        
+    }
 }
 
 function upRight(queue, visited, count = 0) {
     if (count === 2) {
         const node = queue.shift();
+        visited.push(node);
         visited.push(node.right);
         console.log(visited.length);
         visited.forEach(node => {
@@ -168,16 +221,22 @@ function upRight(queue, visited, count = 0) {
         return visited;
     }
     const node = queue.shift();
-    visited.push(node.up);
-    queue.push(node.up);
-    count++;
-    return upRight(queue, visited, count);
-
+    if (node === null) {
+        return;
+    }
+    else {
+        visited.push(node);
+        // visited.push(node.up);
+        queue.push(node.up);
+        count++;
+        return upRight(queue, visited, count);        
+    }
 }
 
 function downLeft(queue, visited, count = 0) {
     if (count === 2) {
         const node = queue.shift();
+        visited.push(node);
         visited.push(node.left);
         console.log(visited.length);
         visited.forEach(node => {
@@ -186,16 +245,23 @@ function downLeft(queue, visited, count = 0) {
         return visited;
     }
     const node = queue.shift();
-    visited.push(node.down);
-    queue.push(node.down);
-    count++;
-    return downLeft(queue, visited, count);
+    if (node === null) {
+        return;
+    }
+    else {
+        visited.push(node);
+        // visited.push(node.down);
+        queue.push(node.down);
+        count++;
+        return downLeft(queue, visited, count)       
+    }
+};
 
-}
 
 function downRight(queue, visited, count = 0) {
     if (count === 2) {
         const node = queue.shift();
+        visited.push(node);
         visited.push(node.right);
         console.log(visited.length);
         visited.forEach(node => {
@@ -204,9 +270,14 @@ function downRight(queue, visited, count = 0) {
         return visited;
     }
     const node = queue.shift();
-    visited.push(node.down);
-    queue.push(node.down);
-    count++;
-    return downRight(queue, visited, count);
-
+    if (node === null) {
+        return;
+    }
+    else {
+        visited.push(node);
+        // visited.push(node.down);
+        queue.push(node.down);
+        count++;
+        return downRight(queue, visited, count);     
+    }
 }
