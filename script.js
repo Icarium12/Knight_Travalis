@@ -4,7 +4,8 @@ class Node {
         this.left = left,
         this.right = right,
         this.up = up,
-        this.down = down
+        this.down = down,
+        this.visit = false;
     }
 }
 
@@ -67,12 +68,15 @@ function knightMoves(start, end, queue = [], visited = []) {
 knightMoves([3, 3], [5, 3]);
 
 function decison(node, end, queue, visited) {
+    node.visit = true;
     queue.push(node);
     let nextNode;
     const row = node.value[0] - end[0];
     console.log(row);
     const column = node.value[1] - end[1];
     console.log(column);
+
+
 
     if (row === 0 && column === 0) {
         return visited;
@@ -122,9 +126,16 @@ function decison(node, end, queue, visited) {
         nextNode = sideRightDown(queue, visited);
     }
     else if (row === -1 && column === -1) {
-        nextNode = upRight(queue, visited);
+        nextNode = sideRightUp(queue, visited);
     }
     console.log(nextNode.value);
+
+
+    if (nextNode.visit === true) {
+        visited.pop();
+        nextNode = visited[visited.length - 1];
+        
+    }
     return decison(nextNode, end, queue, visited);
 }
 
