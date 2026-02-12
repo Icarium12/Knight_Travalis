@@ -65,4 +65,64 @@ for (let i = 0; i < board.length; i++) {
 
 }
 
+knightMoves([3, 3], [4, 3]);
 
+function knightMoves(start, end, queue = [], visited = []) {
+    const node = board[start[0]][start[1]];
+    console.log(node);
+    queue.push(node);
+
+    const vists = traverse(end, queue, visited);
+    console.log(vists);
+
+}
+
+function traverse(end, queue, visited) {
+    // if (queue.length === 0) {
+    //     return;
+    // }
+
+    const node = queue.shift();
+    console.log(node.value);
+    
+    if (node.value === end) {
+        return visited;
+    }
+
+    if (node.sideLeftUp !== null && node.sideLeftUp.visit === false) {
+        queue.push(node.sideLeftUp);
+    }
+
+    if (node.sideRightUp !== null && node.sideRightUp.visit === false) {
+        queue.push(node.sideRightUp);
+    }
+
+    if (node.sideLeftDown !== null && node.sideLeftDown.visit === false) {
+        queue.push(node.sideLeftDown);
+    }
+
+    if (node.sideRightDown !== null && node.sideRightDown.visit === false) {
+        queue.push(node.sideRightDown);
+    }
+
+    if (node.upLeft !== null && node.upLeft.visit === false) {
+        queue.push(node.upLeft);
+    }
+
+    if (node.upRight !== null && node.upRight.visit === false) {
+        queue.push(node.upRight);
+    }
+
+    if (node.downLeft !== null && node.downLeft.visit === false) {
+        queue.push(node.downLeft);
+    }
+
+    if (node.downRight !== null && node.downRight.visit === false) {
+        queue.push(node.downRight);
+    }
+
+    node.visit = true;
+    visited.push(node);
+
+    return traverse(end, queue, visited);
+}
